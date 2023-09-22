@@ -1,13 +1,16 @@
 #!/usr/bin/env python3
 
-from flask import Flask, request
+from flask import Flask, request, current_app
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
     host = request.headers.get('Host')
-    return f'<h1>Python Operations with Flask Routing and Views</h1><p>Host: {host}</p>'
+    app_name = current_app.name
+    return f'''<h1>Python Operations with Flask Routing and Views</h1>
+               <p>Host: {host}</p>
+               <p>App Name: {app_name}</p>'''
 
 @app.route('/<string:username>')
 def user(username):
