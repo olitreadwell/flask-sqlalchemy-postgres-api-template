@@ -6,7 +6,8 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return '<h1>Python Operations with Flask Routing and Views</h1>'
+    host = request.headers.get('Host')
+    return f'<h1>Python Operations with Flask Routing and Views</h1><p>Host: {host}</p>'
 
 @app.route('/<string:username>')
 def user(username):

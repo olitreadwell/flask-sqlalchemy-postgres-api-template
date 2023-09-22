@@ -14,7 +14,7 @@ class TestApp:
     def test_index_text(self):
         '''displays "Python Operations with Flask Routing and Views" in h1 in browser.'''
         response = app.test_client().get('/')
-        assert(response.data.decode() == '<h1>Python Operations with Flask Routing and Views</h1>')
+        assert(response.data.decode() == '<h1>Python Operations with Flask Routing and Views</h1><p>Host: localhost</p>')
 
     def test_print_route(self):
         '''has a resource available at "/print/<parameter>".'''
