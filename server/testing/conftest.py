@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+
 def pytest_itemcollected(item):
     # Get the parent and child nodes.
     par = item.parent.obj
@@ -11,4 +12,4 @@ def pytest_itemcollected(item):
 
     # Set the node ID.
     if pref or suf:
-        item._nodeid = ' '.join((pref, suf))
+        item._nodeid = " ".join((pref, suf))
