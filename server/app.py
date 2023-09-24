@@ -2,7 +2,7 @@
 
 import os
 
-from flask import Flask, current_app, g, request
+from flask import Flask, current_app, g, make_response, request
 
 app = Flask(__name__)
 
@@ -10,7 +10,6 @@ app = Flask(__name__)
 # happens before every request
 @app.before_request
 def before_request():
-    print("before_request called")
     # g is a global object for the context of the request
     # sets the current working directory path to the global object
     g.path = os.path.abspath(os.getcwd())
@@ -20,10 +19,17 @@ def before_request():
 def index():
     host = request.headers.get("Host")
     app_name = current_app.name
-    return f"""<h1>Python Operations with Flask Routing and Views</h1>
+
+    response_body = f"""<h1>Python Operations with Flask Routing and Views</h1>
                <p>Host: {host}</p>
                <p>App Name: {app_name}</p>
                <p>Path: {g.path}</p>"""
+
+    status_code = 200
+    response_headers = {"Content-Type": "text/html"}
+
+    response = make_response(response_body, status_code, response_headers)
+    return response
 
 
 @app.route("/<string:username>")
