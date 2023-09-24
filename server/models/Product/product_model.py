@@ -1,5 +1,9 @@
 from extensions import db
 
+# this is an absolute import from the root of the project
+# server is the root of the project
+# extensions is a file in the root of the project
+
 
 class Product(db.Model):
     """Product model."""
