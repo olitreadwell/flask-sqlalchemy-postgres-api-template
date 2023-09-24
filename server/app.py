@@ -1,8 +1,19 @@
 #!/usr/bin/env python3
 
-from flask import Flask, current_app, request
+import os
+
+from flask import Flask, current_app, g, request
 
 app = Flask(__name__)
+
+
+# happens before every request
+@app.before_request
+def before_request():
+    print("before_request called")
+    # g is a global object for the context of the request
+    # sets the current working directory path to the global object
+    g.path = os.path.abspath(os.getcwd())
 
 
 @app.route("/")
@@ -11,7 +22,8 @@ def index():
     app_name = current_app.name
     return f"""<h1>Python Operations with Flask Routing and Views</h1>
                <p>Host: {host}</p>
-               <p>App Name: {app_name}</p>"""
+               <p>App Name: {app_name}</p>
+               <p>Path: {g.path}</p>"""
 
 
 @app.route("/<string:username>")
