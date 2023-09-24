@@ -2,9 +2,18 @@
 
 import os
 
+from extensions import db
 from flask import Flask, abort, current_app, g, make_response, redirect, request
+from flask_migrate import Migrate
 
 app = Flask(__name__)
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///app.db"
+
+db.init_app(app)
+migrate = Migrate(app, db)
+
+from models.Product.product_model import Product
+from models.User.user_model import User
 
 
 # happens before every request

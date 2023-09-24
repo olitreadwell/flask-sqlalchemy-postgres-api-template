@@ -8,6 +8,8 @@ flask = "2.2.2"
 importlib-metadata = "6.0.0"
 importlib-resources = "5.10.0"
 pyupgrade = "*"
+flask-migrate = "*"
+flask-sqlalchemy = "*"
 
 [dev-packages]
 pytest = "7.2.0"
