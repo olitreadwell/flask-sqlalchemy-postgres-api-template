@@ -1,4 +1,5 @@
 # flask-sqlalchemy-postgres-api-template
+
 flask-sqlalchemy-api-template
 
 <h1 align="center">
@@ -132,9 +133,9 @@ Please follow these steps for manual setup:
 2. Replace all the [variables](#variables-reference) to your desired values
 3. Initialize the repo in the precompiled template folder
 
-    `or`
+   `or`
 
-    Move the necessary files from precompiled template folder to your existing project directory. Don't forget the `.github` directory that may be hidden by default in your operating system
+   Move the necessary files from precompiled template folder to your existing project directory. Don't forget the `.github` directory that may be hidden by default in your operating system
 
 #### Variables reference
 
@@ -152,7 +153,7 @@ Default values are provided as an example to help you figure out what should be 
 | OPEN_SOURCE_LICENSE        | MIT license        | Full OSS license name                                                       |
 | modern_header              | y                  | Use HTML to prettify your header                                            |
 | table_in_about             | n                  | Use table to wrap around About section                                      |
-| include_logo               | y                  | Include Logo section. Only valid when `modern_header == y`          |
+| include_logo               | y                  | Include Logo section. Only valid when `modern_header == y`                  |
 | include_badges             | y                  | Include section for badges                                                  |
 | include_toc                | y                  | Include Table of Contents                                                   |
 | include_screenshots        | y                  | Include Screenshots section                                                 |
