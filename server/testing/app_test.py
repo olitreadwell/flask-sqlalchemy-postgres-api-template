@@ -28,6 +28,10 @@ class TestApp:
         assert response.status_code == 302
         assert response.headers["Location"] == "/"
 
+    def test_error(self):
+        response = app.test_client().get("/error")
+        assert response.status_code == 500
+
     def test_print_route(self):
         """has a resource available at "/print/<parameter>"."""
         response = app.test_client().get("/print/hello")

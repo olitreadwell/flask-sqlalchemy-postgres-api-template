@@ -38,6 +38,12 @@ def redirect_to_index():
     return redirect("/")
 
 
+@app.route("/error")
+def error():
+    abort(500)
+    return make_response(f"<h1>error</h1>", 500)
+
+
 @app.route("/<string:username>")
 def user(username):
     return f"<h1>Welcome to my Flask app, {username}!</h1>"
