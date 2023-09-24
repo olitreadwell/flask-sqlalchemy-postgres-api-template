@@ -22,6 +22,12 @@ class TestApp:
     #            <p>App Name: app</p>"""
     #     )
 
+    def test_redirect(self):
+        """redirects to "/"."""
+        response = app.test_client().get("/redirect")
+        assert response.status_code == 302
+        assert response.headers["Location"] == "/"
+
     def test_print_route(self):
         """has a resource available at "/print/<parameter>"."""
         response = app.test_client().get("/print/hello")

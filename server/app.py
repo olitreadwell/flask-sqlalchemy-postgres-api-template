@@ -2,7 +2,7 @@
 
 import os
 
-from flask import Flask, current_app, g, make_response, request
+from flask import Flask, abort, current_app, g, make_response, redirect, request
 
 app = Flask(__name__)
 
@@ -30,6 +30,12 @@ def index():
 
     response = make_response(response_body, status_code, response_headers)
     return response
+
+
+@app.route("/redirect")
+def redirect_to_index():
+    """redirects to "/" """
+    return redirect("/")
 
 
 @app.route("/<string:username>")
