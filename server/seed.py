@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+import random
+
 from app import app, db
 from faker import Faker
 from models import Product, User
@@ -22,12 +24,28 @@ with app.app_context():
     db.session.add_all(users)
 
     # create products
-    products = []
-    for _ in range(100):
-        product_name = fake.color_name() + " " + fake.word(part_of_speech="noun")
-        product = Product(name=product_name)
-        products.append(product)
+    def seed_products():
+        print("Seeding products...")
+        categories = {
+            1: "Electronics",
+            2: "Clothing",
+            3: "Home",
+            4: "Sports",
+            5: "Toys",
+        }
+        for _ in range(100):
+            category_id = random.randint(1, 5)
+            product = Product(
+                name=fake.color_name() + " " + fake.word(part_of_speech="noun"),
+                description=fake.sentence(),
+                price=(
+                    fake.pyfloat(min_value=0, max_value=10000, right_digits=5) * 100
+                ),
+                quantity=fake.random_int(min=0, max=100),
+                category=categories[category_id],
+                image_url=fake.image_url(),
+            )
+            db.session.add(product)
+        db.session.commit()
 
-    db.session.add_all(products)
-
-    db.session.commit()
+    seed_products()
