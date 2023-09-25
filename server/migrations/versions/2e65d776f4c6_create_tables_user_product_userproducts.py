@@ -1,15 +1,15 @@
 """Create tables User,Product, UserProducts
 
-Revision ID: 88e8b0c788e9
+Revision ID: 2e65d776f4c6
 Revises: 
-Create Date: 2023-09-25 00:55:56.661235
+Create Date: 2023-09-25 01:25:17.024854
 
 """
 import sqlalchemy as sa
 from alembic import op
 
 # revision identifiers, used by Alembic.
-revision = "88e8b0c788e9"
+revision = "2e65d776f4c6"
 down_revision = None
 branch_labels = None
 depends_on = None
