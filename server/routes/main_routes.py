@@ -33,14 +33,14 @@ def print_parameter(parameter):
 
 @main_routes.route("/redirect")
 def redirect_to_index():
-    """redirects to "/" """
+    """Redirects to "/"."""
     return redirect("/")
 
 
 @main_routes.route("/error")
 def error():
-    """returns a 500 error"""
-    return make_response(f"<h1>error</h1>", 500)
+    """Returns a 500 error."""
+    return make_response("<h1>error</h1>", 500)
 
 
 @main_routes.route("/count/<parameter>")
