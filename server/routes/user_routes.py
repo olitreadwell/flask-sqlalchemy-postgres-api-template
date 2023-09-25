@@ -47,6 +47,34 @@ def get_all_users():
 def get_user_by_id(id):
     user = User.query.filter(User.id == id).first()
 
+    user_products = user.user_products
+    user_products = sorted(
+        user_products, key=lambda user_product: user_product.product.category
+    )
+    user_products_string = """<h1>User Products</h1>
+                            <table>
+                                <tr>
+                                    <th>product category</th>
+                                    <th>product_id</th>
+                                    <th>product name</th>
+                                    <th>price</th>
+                                    <th>quantity</th>
+                                </tr>
+                            """
+
+    for user_product in user_products:
+        user_products_string += f"""
+                                <tr>
+                                    <td>{user_product.product.category}</td>
+                                    <td>{user_product.product.id}</td>
+                                    <td>{user_product.product.name}</td>
+                                    <td>{user_product.product.price}</td>
+                                    <td>{user_product.product.quantity}</td>
+                                </tr>
+                                """
+
+    user_products_string += "</table>"
+
     if not user:
         response = make_response("<h1>404 user not found</h1>", 404)
     else:
@@ -61,6 +89,7 @@ def get_user_by_id(id):
                                 </tr>
                                 {user_string(user)}
                             </table>
+                            {user_products_string}
                             """
 
         response = make_response(response_body, 200)
@@ -72,20 +101,52 @@ def get_user_by_id(id):
 def get_random_user():
     user = User.query.order_by(func.random()).first()
 
-    response_body = f"""<h1>Random User</h1>
-                        <table>
-                            <tr>
-                                <th>id</th>
-                                <th>username</th>
-                                <th>email</th>
-                                <th>first_name</th>
-                                <th>last_name</th>
-                            </tr>
-                            {user_string(user)}
-                        </table>
-                        """
+    user_products = user.user_products
+    user_products = sorted(
+        user_products, key=lambda user_product: user_product.product.category
+    )
+    user_products_string = """<h1>User Products</h1>
+                            <table>
+                                <tr>
+                                    <th>product category</th>
+                                    <th>product_id</th>
+                                    <th>product name</th>
+                                    <th>price</th>
+                                    <th>quantity</th>
+                                </tr>
+                            """
 
-    response = make_response(response_body, 200)
+    for user_product in user_products:
+        user_products_string += f"""
+                                <tr>
+                                    <td>{user_product.product.category}</td>
+                                    <td>{user_product.product.id}</td>
+                                    <td>{user_product.product.name}</td>
+                                    <td>{user_product.product.price}</td>
+                                    <td>{user_product.product.quantity}</td>
+                                </tr>
+                                """
+
+    user_products_string += "</table>"
+
+    if not user:
+        response = make_response("<h1>404 user not found</h1>", 404)
+    else:
+        response_body = f"""<h1>Random User</h1>
+                            <table>
+                                <tr>
+                                    <th>id</th>
+                                    <th>username</th>
+                                    <th>email</th>
+                                    <th>first_name</th>
+                                    <th>last_name</th>
+                                </tr>
+                                {user_string(user)}
+                            </table>
+                            {user_products_string}
+                            """
+
+        response = make_response(response_body, 200)
 
     return response
 
