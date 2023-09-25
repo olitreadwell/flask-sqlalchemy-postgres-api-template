@@ -4,19 +4,42 @@ from models import Product
 product_routes = Blueprint("product_routes", __name__)
 
 
+def product_string(product):
+    product_string = f"""
+                        <tr>
+                            <td>{product.id}</td>
+                            <td>{product.name}</td>
+                            <td>{product.description}</td>
+                            <td>{product.price}</td>
+                            <td>{product.quantity}</td>
+                            <td>{product.category}</td>
+                            <td><a href="{product.image_url}" target="_blank">product image</a></td>
+                        </tr>
+                    """
+    return product_string
+
+
 @product_routes.route("/products")
 def get_all_products():
     products = Product.query.all()
 
-    response_body = "<h1>Products</h1>"
+    response_body = """<h1>Products</h1>
+                    <table>
+                        <tr>
+                            <th>id</th>
+                            <th>name</th>
+                            <th>description</th>
+                            <th>price</th>
+                            <th>quantity</th>
+                            <th>category</th>
+                            <th>image_url</th>
+                        </tr>
+                    """
 
     for product in products:
-        response_body += f"""
-                            <p>
-                            <span>id: {product.id}</span>
-                            <span>name: {product.name}</span>
-                            </p>
-                            """
+        response_body += product_string(product)
+
+    response_body += "</table>"
 
     response = make_response(response_body, 200)
 
@@ -30,10 +53,22 @@ def get_product_by_id(id):
     if not product:
         response = make_response("<h1>404 product not found</h1>", 404)
     else:
-        response_body = f"""<h1>Product</h1>
-                            <p>id: {product.id}</p>
-                            <p>name: {product.name}</p>
-                            """
+        response_body = """<h1>Products</h1>
+                    <table>
+                        <tr>
+                            <th>id</th>
+                            <th>name</th>
+                            <th>description</th>
+                            <th>price</th>
+                            <th>quantity</th>
+                            <th>category</th>
+                            <th>image_url</th>
+                        </tr>
+                    """
+
+        response_body += product_string(product)
+
+        response_body += "</table>"
 
         response = make_response(response_body, 200)
 
