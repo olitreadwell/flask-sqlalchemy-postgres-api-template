@@ -14,14 +14,26 @@ with app.app_context():
     User.query.delete()
 
     # create users
-    users = []
-    for _ in range(50):
-        simple_profile = fake.simple_profile()
-        username = simple_profile["username"]
-        user = User(username=username)
-        users.append(user)
+    def seed_users():
+        print("Seeding users...")
+        for _ in range(50):
+            simple_profile = fake.simple_profile()
+            username = simple_profile["username"]
+            email = simple_profile["mail"]
+            password = fake.password()
+            first_name = simple_profile["name"].split()[0]
+            last_name = simple_profile["name"].split()[1]
+            user = User(
+                username=username,
+                email=email,
+                password=password,
+                first_name=first_name,
+                last_name=last_name,
+            )
+            db.session.add(user)
+        db.session.commit()
 
-    db.session.add_all(users)
+    seed_users()
 
     # create products
     def seed_products():

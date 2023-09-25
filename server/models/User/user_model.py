@@ -1,8 +1,6 @@
-from extensions import db
+from datetime import datetime
 
-# this is an absolute import from the root of the project
-# server is the root of the project
-# extensions is a file in the root of the project
+from extensions import db
 
 
 class User(db.Model):
@@ -10,10 +8,24 @@ class User(db.Model):
 
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True)
+    username = db.Column(db.String(80))
+    email = db.Column(db.String(120))
+    password = db.Column(db.String(128))
+    first_name = db.Column(db.String(80))
+    last_name = db.Column(db.String(80))
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(
+        db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow
+    )
 
-    def __init__(self, username):
+    def __init__(self, username, email, password, first_name, last_name):
         self.username = username
+        self.email = email
+        self.password = password
+        self.first_name = first_name
+        self.last_name = last_name
 
     def __repr__(self):
-        return f"<User {self.username}>"
+        return f"<User id={self.id} username={self.username} email={self.email} \
+                    password={self.password} first_name={self.first_name} last_name={self.last_name} \
+                    is_active={self.is_active} created_at={self.created_at} updated_at={self.updated_at}>"
