@@ -21,24 +21,6 @@ class Product(db.Model):
 
     user_products = db.relationship("UserProduct", back_populates="product")
 
-    def __init__(
-        self,
-        name,
-        description,
-        price,
-        quantity,
-        category,
-        image_url,
-        user_products=[],
-    ):
-        self.name = name
-        self.description = description
-        self.price = price
-        self.quantity = quantity
-        self.category = category
-        self.image_url = image_url
-        self.user_products = user_products
-
     def __repr__(self):
         return (
             f"<Product id={self.id}, name={self.name}, "

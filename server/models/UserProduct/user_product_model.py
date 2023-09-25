@@ -21,11 +21,6 @@ class UserProduct(db.Model):
     # add a relationship to the Product model
     product = db.relationship("Product", back_populates="user_products")
 
-    def __init__(self, user_id, product_id, quantity):
-        self.user_id = user_id
-        self.product_id = product_id
-        self.quantity = quantity
-
     def __repr__(self):
         return f"<UserProduct id={self.id} user_id={self.user_id} product_id={self.product_id} \
                     quantity={self.quantity} created_at={self.created_at} updated_at={self.updated_at}>"

@@ -20,16 +20,6 @@ class User(db.Model):
 
     user_products = db.relationship("UserProduct", back_populates="user")
 
-    def __init__(
-        self, username, email, password, first_name, last_name, user_products=[]
-    ):
-        self.username = username
-        self.email = email
-        self.password = password
-        self.first_name = first_name
-        self.last_name = last_name
-        self.user_products = user_products
-
     def __repr__(self):
         return f"<User id={self.id} username={self.username} email={self.email} \
                     password={self.password} first_name={self.first_name} last_name={self.last_name} \
