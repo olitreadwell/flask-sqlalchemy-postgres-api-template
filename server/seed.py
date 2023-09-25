@@ -4,12 +4,13 @@ import random
 
 from app import app, db
 from faker import Faker
-from models import Product, User
+from models import Product, User, UserProduct
 
 fake = Faker()
 
 with app.app_context():
     # delete all rows in the tables
+    UserProduct.query.delete()
     Product.query.delete()
     User.query.delete()
 
@@ -61,3 +62,21 @@ with app.app_context():
         db.session.commit()
 
     seed_products()
+
+    # create user products
+    def seed_user_products():
+        print("Seeding user products...")
+        users = User.query.all()
+        products = Product.query.all()
+        for user in users:
+            for _ in range(random.randint(0, 10)):
+                product = random.choice(products)
+                user_product = UserProduct(
+                    user_id=user.id,
+                    product_id=product.id,
+                    quantity=random.randint(1, 50),
+                )
+                db.session.add(user_product)
+        db.session.commit()
+
+    seed_user_products()

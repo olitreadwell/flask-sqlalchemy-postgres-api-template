@@ -19,19 +19,32 @@ class Product(db.Model):
     created_at = db.Column(db.DateTime, default=db.func.now())
     updated_at = db.Column(db.DateTime, default=db.func.now(), onupdate=db.func.now())
 
-    def __init__(self, name, description, price, quantity, category, image_url):
+    user_products = db.relationship("UserProduct", back_populates="product")
+
+    def __init__(
+        self,
+        name,
+        description,
+        price,
+        quantity,
+        category,
+        image_url,
+        user_products=[],
+    ):
         self.name = name
         self.description = description
         self.price = price
         self.quantity = quantity
         self.category = category
         self.image_url = image_url
+        self.user_products = user_products
 
     def __repr__(self):
         return (
             f"<Product id={self.id}, name={self.name}, "
             f"description={self.description}, price={self.price}, "
             f"quantity={self.quantity}, category={self.category}, "
-            f"image_url={self.image_url}, created_at={self.created_at}, "
-            f"updated_at={self.updated_at}>"
+            f"image_url={self.image_url}, "
+            f"user_products={self.user_products},"
+            f"created_at={self.created_at}, updated_at={self.updated_at}>"
         )
