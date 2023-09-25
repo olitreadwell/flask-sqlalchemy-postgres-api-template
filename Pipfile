@@ -10,6 +10,7 @@ importlib-resources = "5.10.0"
 pyupgrade = "*"
 flask-migrate = "*"
 flask-sqlalchemy = "*"
+faker = "*"
 
 [dev-packages]
 pytest = "7.2.0"
