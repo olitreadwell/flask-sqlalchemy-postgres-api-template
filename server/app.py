@@ -14,6 +14,8 @@ from routes.user_routes import user_routes
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///app.db"
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.json.compact = False
 
 migrate = Migrate(app, db)
 
