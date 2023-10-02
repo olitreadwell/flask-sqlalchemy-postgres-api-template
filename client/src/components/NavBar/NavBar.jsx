@@ -1,12 +1,22 @@
 import { NavLink } from "react-router-dom";
 
+const navLinkStyles = {
+  margin: "0.5rem",
+};
+
 const NavBar = () => (
   <nav>
-    <NavLink exact to="/" activeClassName="active">
+    <NavLink exact style={navLinkStyles} to="/" activeClassName="active">
       Home
     </NavLink>
-    <NavLink to="/about" activeClassName="active">
+    <NavLink style={navLinkStyles} to="/about" activeClassName="active">
       About
+    </NavLink>
+    <NavLink style={navLinkStyles} to="/users" activeClassName="active">
+      Users
+    </NavLink>
+    <NavLink style={navLinkStyles} to="/products" activeClassName="active">
+      Products
     </NavLink>
   </nav>
 );
