@@ -1,9 +1,10 @@
 from datetime import datetime
 
 from extensions import db
+from sqlalchemy_serializer import SerializerMixin
 
 
-class User(db.Model):
+class User(db.Model, SerializerMixin):
     """User model."""
 
     __tablename__ = "users"
