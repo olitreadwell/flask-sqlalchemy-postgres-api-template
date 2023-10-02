@@ -4,22 +4,6 @@ from sqlalchemy.sql.expression import func
 
 product_routes = Blueprint("product_routes", __name__)
 
-
-def product_string(product):
-    product_string = f"""
-                        <tr>
-                            <td>{product.id}</td>
-                            <td>{product.name}</td>
-                            <td>{product.description}</td>
-                            <td>{product.price}</td>
-                            <td>{product.quantity}</td>
-                            <td>{product.category}</td>
-                            <td><a href="{product.image_url}" target="_blank">product image</a></td>
-                        </tr>
-                    """
-    return product_string
-
-
 api_v1 = "/api/v1"
 
 
@@ -105,29 +89,25 @@ def get_random_product():
     api_v1 + "/products/random/<int:num_of_products>/", strict_slashes=False
 )
 def get_random_products(num_of_products):
-    products = Product.query.order_by(func.random()).limit(num_of_products)
+    returned_products = []
 
-    # sort products by id
-    products = sorted(products, key=lambda product: product.id)
+    random_products = Product.query.order_by(func.random()).limit(num_of_products)
+    random_products = sorted(random_products, key=lambda product: product.id)
 
-    response_body = """<h1>Random Products</h1>
-                        <table>
-                            <tr>
-                                <th>id</th>
-                                <th>name</th>
-                                <th>description</th>
-                                <th>price</th>
-                                <th>quantity</th>
-                                <th>category</th>
-                                <th>image_url</th>
-                            </tr>
-                        """
+    for product in random_products:
+        product_dict = {
+            "id": product.id,
+            "name": product.name,
+            "description": product.description,
+            "price": product.price,
+            "quantity": product.quantity,
+            "category": product.category,
+            "image_url": product.image_url,
+        }
+        returned_products.append(product_dict)
 
-    for product in products:
-        response_body += product_string(product)
-
-    response_body += "</table>"
-
-    response = make_response(response_body, 200)
+    response = make_response(
+        jsonify(returned_products), 200, {"Content-Type": "application/json"}
+    )
 
     return response

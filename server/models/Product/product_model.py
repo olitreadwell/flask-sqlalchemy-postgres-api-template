@@ -1,11 +1,12 @@
 from extensions import db
+from sqlalchemy_serializer import SerializerMixin
 
 # this is an absolute import from the root of the project
 # server is the root of the project
 # extensions is a file in the root of the project
 
 
-class Product(db.Model):
+class Product(db.Model, SerializerMixin):
     """Product model."""
 
     __tablename__ = "products"
