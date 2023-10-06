@@ -1,4 +1,5 @@
 from extensions import db
+from sqlalchemy_serializer import SerializerMixin
 
 # this is an absolute import from the root of the project
 # server is the root of the project
@@ -9,6 +10,12 @@ class UserProduct(db.Model):
     """UserProduct model."""
 
     __tablename__ = "user_products"
+
+    serialize_rules = (
+        "-user.user_products",
+        "-product.user_products",
+    )
+
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     product_id = db.Column(db.Integer, db.ForeignKey("products.id"))

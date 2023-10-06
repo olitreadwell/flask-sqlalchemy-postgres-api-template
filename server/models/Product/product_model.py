@@ -10,6 +10,9 @@ class Product(db.Model, SerializerMixin):
     """Product model."""
 
     __tablename__ = "products"
+
+    serialize_rules = ("-user_products.product",)
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), unique=True)
     description = db.Column(db.Text)

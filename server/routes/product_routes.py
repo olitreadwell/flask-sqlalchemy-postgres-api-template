@@ -15,15 +15,7 @@ def get_all_products():
     all_products = sorted(all_products, key=lambda product: product.id)
 
     for product in all_products:
-        product_dict = {
-            "id": product.id,
-            "name": product.name,
-            "description": product.description,
-            "price": product.price,
-            "quantity": product.quantity,
-            "category": product.category,
-            "image_url": product.image_url,
-        }
+        product_dict = product.to_dict()
         products.append(product_dict)
 
     response = make_response(
@@ -44,18 +36,10 @@ def get_product_by_id(id):
             {"Content-Type": "application/json"},
         )
     else:
-        product = {
-            "id": product.id,
-            "name": product.name,
-            "description": product.description,
-            "price": product.price,
-            "quantity": product.quantity,
-            "category": product.category,
-            "image_url": product.image_url,
-        }
+        product_dict = product.to_dict()
 
         response = make_response(
-            jsonify(product), 200, {"Content-Type": "application/json"}
+            jsonify(product_dict), 200, {"Content-Type": "application/json"}
         )
 
     return response
@@ -68,15 +52,8 @@ def get_random_product():
     if not product:
         response_body = {"error": "No products found"}
     else:
-        response_body = {
-            "id": product.id,
-            "name": product.name,
-            "description": product.description,
-            "price": product.price,
-            "quantity": product.quantity,
-            "category": product.category,
-            "image_url": product.image_url,
-        }
+        product_dict = product.to_dict()
+        response_body = product_dict
 
     response = make_response(
         jsonify(response_body), 200, {"Content-Type": "application/json"}
@@ -95,15 +72,7 @@ def get_random_products(num_of_products):
     random_products = sorted(random_products, key=lambda product: product.id)
 
     for product in random_products:
-        product_dict = {
-            "id": product.id,
-            "name": product.name,
-            "description": product.description,
-            "price": product.price,
-            "quantity": product.quantity,
-            "category": product.category,
-            "image_url": product.image_url,
-        }
+        product_dict = product.to_dict()
         returned_products.append(product_dict)
 
     response = make_response(

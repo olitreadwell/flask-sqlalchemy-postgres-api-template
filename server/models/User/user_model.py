@@ -8,6 +8,9 @@ class User(db.Model, SerializerMixin):
     """User model."""
 
     __tablename__ = "users"
+
+    serialize_rules = ("-user_products.user",)
+
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80))
     email = db.Column(db.String(120))

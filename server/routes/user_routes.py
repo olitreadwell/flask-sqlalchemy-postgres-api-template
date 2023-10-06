@@ -16,13 +16,7 @@ def get_all_users():
     all_users = sorted(all_users, key=lambda user: user.id)
 
     for user in all_users:
-        user_dict = {
-            "id": user.id,
-            "username": user.username,
-            "email": user.email,
-            "first_name": user.first_name,
-            "last_name": user.last_name,
-        }
+        user_dict = user.to_dict()
         users.append(user_dict)
 
     response = make_response(jsonify(users), 200, {"Content-Type": "application/json"})
@@ -41,16 +35,10 @@ def get_user_by_id(id):
             {"Content-Type": "application/json"},
         )
     else:
-        user = {
-            "id": user.id,
-            "username": user.username,
-            "email": user.email,
-            "first_name": user.first_name,
-            "last_name": user.last_name,
-        }
+        user_dict = user.to_dict()
 
         response = make_response(
-            jsonify(user), 200, {"Content-Type": "application/json"}
+            jsonify(user_dict), 200, {"Content-Type": "application/json"}
         )
 
     return response
@@ -63,13 +51,8 @@ def get_random_user():
     if not user:
         response_body = {"error": "No users found"}
     else:
-        response_body = {
-            "id": user.id,
-            "username": user.username,
-            "email": user.email,
-            "first_name": user.first_name,
-            "last_name": user.last_name,
-        }
+        user_dict = user.to_dict()
+        response_body = user_dict
 
     response = make_response(
         jsonify(response_body), 200, {"Content-Type": "application/json"}
@@ -86,13 +69,7 @@ def get_random_users(num_of_users):
     random_users = sorted(random_users, key=lambda user: user.id)
 
     for user in random_users:
-        user_dict = {
-            "id": user.id,
-            "username": user.username,
-            "email": user.email,
-            "first_name": user.first_name,
-            "last_name": user.last_name,
-        }
+        user_dict = user.to_dict()
         returned_users.append(user_dict)
 
     response = make_response(
