@@ -13,7 +13,7 @@ module.exports = {
   plugins: ["react-refresh"],
   rules: {
     // Stylistic rules
-    indent: ["warn", 4, { SwitchCase: 1 }],
+    indent: ["warn", 2, { SwitchCase: 1 }],
 
     // Enforces consistent linebreak style (unix)
     "linebreak-style": ["warn", "unix"],
