@@ -1,7 +1,7 @@
 """Create tables User,Product, UserProducts
 
 Revision ID: 2e65d776f4c6
-Revises: 
+Revises:
 Create Date: 2023-09-25 01:25:17.024854
 
 """
