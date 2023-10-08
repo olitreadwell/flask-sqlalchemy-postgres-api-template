@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const Users = () => {
+const UserList = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -33,4 +33,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default UserList;
